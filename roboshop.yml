@@ -40,5 +40,5 @@
       ttl: 1
       value: "{{ item.instancetypes[0].private_ip_address}}"
       overwrite: true
-    loop: "{{ ec2_creation_output.result }}"
+    loop: "{{ ec2_creation_output.results }}"
     when: action == "create"
