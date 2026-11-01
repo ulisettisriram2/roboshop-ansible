@@ -9,12 +9,12 @@
   tasks:
   - name: create ec2 instances
     amazon.aws.ec2_instance:
-     name: "sriram-{{ i }}"
+     name: "sriram-{{ item }}"
      image_id: "{{ ami_id }}"
      instance_type: t3.micro
      security_groups:
      - sg-0692481335becb5ca
-     - "sriram-{{ i }}"
+     - "sriram-{{ item }}"
      region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
