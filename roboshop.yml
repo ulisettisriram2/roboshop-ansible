@@ -29,7 +29,7 @@
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
-    register: ec2_creation_ouput
+    register: ec2_creation_output
 
   - name: print the output
     debug:
