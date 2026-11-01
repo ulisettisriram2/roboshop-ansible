@@ -16,6 +16,7 @@
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
+    register: sg-creation-output
 
   - name: create ec2 instances
     amazon.aws.ec2_instance:
@@ -28,3 +29,13 @@
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
+    register: ec2-creation-ouput
+
+  - name: print the output
+    debug:
+      msg: " {{ sg-creation-output.stdout }}"
+  
+  - name: print the output
+    debug:
+      msg: " {{ ec2-creation-output.stdout }}"
+  
