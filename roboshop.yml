@@ -1,0 +1,20 @@
+- name: creation of ec2 instances
+  hosts: local
+  connection: local
+  vars:
+    instance_type: [ "mongodb", "redis", "mysql", "rabbitmq"]
+    action: create
+    domain_name: thorams.store
+    ami_id: ami-0055977a6e828a4f4
+  tasks:
+  - name: create ec2 instances
+    amazon.aws.ec2_instance:
+     name: "sriram-{{ i }}"
+     image_id: "{{ ami_id }}"
+     instance_type: t3.micro
+     security_groups:
+     - sg-0692481335becb5ca
+     - "sriram-{{ i }}""
+     region: us-east-1
+    loop: "{{ instance_type }}"
+    when: action == "create"
