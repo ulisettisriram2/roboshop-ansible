@@ -9,7 +9,7 @@
   tasks:
   - name: create ec2 instances
     amazon.aws.ec2_instance:
-     name: "sriram-{{ im }}"
+     name: "sriram-{{ i }}"
      image_id: "{{ ami_id }}"
      instance_type: t3.micro
      security_groups:
