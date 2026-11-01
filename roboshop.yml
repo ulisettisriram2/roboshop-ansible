@@ -12,6 +12,7 @@
     amazon.aws.ec2_security_group:
       name: "sriram-{{ item }}"
       state: present
+      description: "sriram-{{ item }}-SG"
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
