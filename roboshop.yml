@@ -8,12 +8,13 @@
     ami_id: ami-0055977a6e828a4f4
   tasks:
   - name: create SGs
-    amazon.aws.ec2_security_group:
-      name: "sriram-{{ item }}"
-      state: present
-      region: us-east-1
-    loop: "{{ instancetypes }}"
-    when: action == "create"
+    tasks:
+      amazon.aws.ec2_security_group:
+        name: "sriram-{{ item }}"
+        state: present
+        region: us-east-1
+      loop: "{{ instancetypes }}"
+      when: action == "create"
   - name: create ec2 instances
     amazon.aws.ec2_instance:
       name: "sriram-{{ item }}"
