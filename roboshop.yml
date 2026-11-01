@@ -33,9 +33,9 @@
 
   - name: print the output
     debug:
-      msg: " {{ sg_creation_output.stdout }}"
+      msg: " {{ sg_creation_output }}"
   
   - name: print the output
     debug:
-      msg: " {{ ec2_creation_output.stdout }}"
+      msg: " {{ ec2_creation_output }}"
   
