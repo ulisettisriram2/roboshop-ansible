@@ -11,6 +11,7 @@
   - name: create SGs
     amazon.aws.ec2_security_group:
       name: "sriram-{{ item }}"
+      state: present
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
