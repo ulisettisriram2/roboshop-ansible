@@ -42,3 +42,12 @@
       overwrite: true
     loop: "{{ ec2_creation_output.results }}"
     when: action == "create"
+  - name: Delete R53 service and domain
+    amazon.aws.route53:
+      state: abscent
+      zone: "{{ domain_name }}"
+      record: "{{ item.item }}.{{ domain_name }}"
+      type: A
+      ttl: 1
+    loop: "{{ ec2_creation_output.results }}"
+    when: action == "create"
