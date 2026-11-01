@@ -7,6 +7,13 @@
     domain_name: thorams.store
     ami_id: ami-0055977a6e828a4f4
   tasks:
+  - name: create SGs
+    amazon.aws.ec2_securitygroups:
+      name: "sriram-{{ item }}"
+      region: us-east-1
+    loop: "{{ instancetypes }}"
+    when: action == "create"
+    
   - name: create ec2 instances
     amazon.aws.ec2_instance:
       name: "sriram-{{ item }}"
