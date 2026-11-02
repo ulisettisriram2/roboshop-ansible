@@ -24,7 +24,7 @@
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: "{{ item.item }}.sriram.{{ domain_name }}"
+      record: "{{ item.item }}-sriram.{{ domain_name }}"
       type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
@@ -36,7 +36,7 @@
     amazon.aws.route53:
       state: absent
       zone: "{{ domain_name }}"
-      record: "{{ item }}.{{ domain_name }}"
+      record: "{{ item }}-sriram.{{ domain_name }}"
       ttl: 1
       type: A
     loop: "{{ instancetypes }}"
