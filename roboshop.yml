@@ -14,7 +14,7 @@
       instance_type: t3.micro
       security_groups:
       - sg-0692481335becb5ca
-      - "sriram-{{ item }}"
+      - "sriram-SG-{{ item }}"
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
