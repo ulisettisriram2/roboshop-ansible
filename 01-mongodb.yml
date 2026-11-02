@@ -4,7 +4,7 @@
   tasks:
   - name: Copy repos
     copy:
-      src: mongodb.repo
+      src: mongo.repo
       dest: /etc/yum.repos.d/mongodb.repo
   - name: Test the configuration
     debug: 
