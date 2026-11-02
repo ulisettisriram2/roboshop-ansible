@@ -12,7 +12,7 @@
     amazon.aws.ec2_security_group:
       name: "sriram-{{ item }}"
       state: present
-      description: "sriram-{{ item }}-SG"
+      description: "sriram-SG-{{ item }}"
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "create"
@@ -20,7 +20,7 @@
 
   - name: create ec2 instances
     amazon.aws.ec2_instance:
-      name: "sriram-{{ item }}"
+      name: "sriram-EC2-{{ item }}"
       image_id: "{{ ami_id }}"
       instance_type: t3.micro
       security_groups:
@@ -35,7 +35,7 @@
     amazon.aws.route53:
       state: present
       zone: "{{ domain_name }}"
-      record: " sriram-{{ item.item }}.{{ domain_name }}"
+      record: "{{ item.item }}.sriram.{{ domain_name }}"
       type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
