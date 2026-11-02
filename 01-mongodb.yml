@@ -15,7 +15,7 @@
       state: present
   - name: start the service
     service:
-      name: mongodb
+      name: mongod
       state: started
       enable: yes
   - name: allow remote connections
