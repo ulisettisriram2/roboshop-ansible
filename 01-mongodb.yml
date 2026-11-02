@@ -16,7 +16,7 @@
   - name: start the service
     service:
       name: monogdb
-      state: sarted
+      state: started
       enable: yes
   - name: allow remote connections
     replace:
