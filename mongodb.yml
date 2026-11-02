@@ -1,0 +1,11 @@
+- name: Configure Mongodb instance
+  hosts: mongodb
+  become: yes
+  tasks:
+  - name: Copy repos
+    copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
+  - name: Test the configuration
+    debug: 
+      msg: "{{ app_name }}"
