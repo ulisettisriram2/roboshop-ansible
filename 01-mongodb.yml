@@ -6,6 +6,21 @@
     copy:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongodb.repo
-  - name: Test the configuration
-    debug: 
-      msg: "{{ app_name }}"
+ # - name: Test the configuration
+  #  debug: 
+   #   msg: "{{ app_name }}"
+  - name: install mongodb 
+    package:
+      name: mongodb-org
+      state: present
+  - name: start the service
+    service:
+      name: monogdb
+      state: sarted
+      enable: yes
+  - name: allow remote connections
+    replace:
+      path: /etc/mongodb.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+  
