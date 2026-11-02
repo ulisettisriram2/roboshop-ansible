@@ -1,0 +1,29 @@
+- name: creation of SGs for instances
+  hosts: local
+  connection: local
+  vars:
+    instancetypes: [ "mongodb", "redis", "mysql", "rabbitmq" ]
+    action: create
+    domain_name: thorams.store
+    ami_id: ami-0055977a6e828a4f4
+  
+  tasks:
+  - name: create SGs
+    amazon.aws.ec2_security_group:
+      name: "sriram-SG-{{ item }}"
+      state: present
+      description: "SG for {{ item }}"
+      region: us-east-1
+    loop: "{{ instancetypes }}"
+    when: action == "create"
+    register: sg_creation_output
+
+  - name: delete SGs
+    amazon.aws.ec2_security_group:
+      name: "sriram-SG-{{ item }}"
+      state: absent
+      description: "SG for {{ item }}"
+      region: us-east-1
+    loop: "{{ instancetypes }}"
+    when: action == "delete"
+    register: sg_creation_output 

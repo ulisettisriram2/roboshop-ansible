@@ -7,17 +7,6 @@
     domain_name: thorams.store
     ami_id: ami-0055977a6e828a4f4
   
-  tasks:
-  - name: create SGs
-    amazon.aws.ec2_security_group:
-      name: "sriram-{{ item }}"
-      state: present
-      description: "sriram-SG-{{ item }}"
-      region: us-east-1
-    loop: "{{ instancetypes }}"
-    when: action == "create"
-    register: sg_creation_output
-
   - name: create ec2 instances
     amazon.aws.ec2_instance:
       name: "sriram-EC2-{{ item }}"
@@ -42,6 +31,7 @@
       overwrite: true
     loop: "{{ ec2_creation_output.results }}"
     when: action == "create"
+ 
   - name: Delete R53 service and domain
     amazon.aws.route53:
       state: absent
@@ -51,6 +41,7 @@
       type: A
     loop: "{{ instancetypes }}"
     when: action == "delete"
+ 
   - name: Delete ec2 instances
     amazon.aws.ec2_instance:
       state: absent # must be added
@@ -58,12 +49,4 @@
       region: us-east-1
     loop: "{{ instancetypes }}"
     when: action == "delete"
-  - name: delete SGs
-    amazon.aws.ec2_security_group:
-      name: "sriram-{{ item }}"
-      state: absent
-      description: "sriram-{{ item }}-SG"
-      region: us-east-1
-    loop: "{{ instancetypes }}"
-    when: action == "delete"
-    register: sg_creation_output 
+ 
