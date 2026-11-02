@@ -17,7 +17,7 @@
     service:
       name: mongod
       state: started
-      enable: yes
+      enabled: yes
   - name: allow remote connections
     replace:
       path: /etc/mongodb.conf
